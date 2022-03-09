@@ -9,7 +9,6 @@ workflows:
             branches:
               only:
                 - main
-<<<<<<< HEAD
       - deploy:
           filters:
             branches:
@@ -17,8 +16,6 @@ workflows:
                 - main
           requires:
             - build
-=======
->>>>>>> aac1396 (update config.yml)
 
 jobs:
   build:
@@ -33,21 +30,15 @@ jobs:
       - restore_cache:
           key: dependency-cache-{{ checksum "package-lock.json" }}
       - run:
-<<<<<<< HEAD
           name: install-npm-wee
-          command: npm install
-=======
-          name: install-npm
           command: npm install
       - run:
           name: test-run
           command: npm run test
->>>>>>> aac1396 (update config.yml)
       - save_cache:
           key: dependency-cache-{{ checksum "package-lock.json" }}
           paths:
             - ./node_modules
-<<<<<<< HEAD
   deploy:
     docker:
       - image: circleci/node:10.16.3
@@ -55,5 +46,3 @@ jobs:
       - run:
           name: deploy-application
           command: ssh -o StrictHostKeyChecking=no $EC2_USERNAME@$EC2_PUBLIC_DNS "rm -rf ExampleApplication/; git clone https://github.com/artofgraham/ExampleApplication.git; source ExampleApplication/deploy.sh"
-=======
->>>>>>> aac1396 (update config.yml)
